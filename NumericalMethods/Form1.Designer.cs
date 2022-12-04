@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Count = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,12 +37,11 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.решитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.методомГауссаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.методомПрогонкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заполнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
-            this.Precision = new System.Windows.Forms.TextBox();
+            this.методToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.гауссаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.прогонкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.квадратногоКорняToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -92,8 +91,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle1.NullValue = null;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.NullValue = null;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
             this.Column1.HeaderText = "y";
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -121,36 +120,13 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.решитьToolStripMenuItem,
+            this.методToolStripMenuItem,
             this.заполнитьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // решитьToolStripMenuItem
-            // 
-            this.решитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.методомГауссаToolStripMenuItem,
-            this.методомПрогонкиToolStripMenuItem});
-            this.решитьToolStripMenuItem.Name = "решитьToolStripMenuItem";
-            this.решитьToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.решитьToolStripMenuItem.Text = "Решить";
-            // 
-            // методомГауссаToolStripMenuItem
-            // 
-            this.методомГауссаToolStripMenuItem.Name = "методомГауссаToolStripMenuItem";
-            this.методомГауссаToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.методомГауссаToolStripMenuItem.Text = "Методом Гаусса";
-            this.методомГауссаToolStripMenuItem.Click += new System.EventHandler(this.методомГауссаToolStripMenuItem_Click);
-            // 
-            // методомПрогонкиToolStripMenuItem
-            // 
-            this.методомПрогонкиToolStripMenuItem.Name = "методомПрогонкиToolStripMenuItem";
-            this.методомПрогонкиToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.методомПрогонкиToolStripMenuItem.Text = "Методом прогонки";
-            this.методомПрогонкиToolStripMenuItem.Click += new System.EventHandler(this.методомПрогонкиToolStripMenuItem_Click);
             // 
             // заполнитьToolStripMenuItem
             // 
@@ -159,30 +135,42 @@
             this.заполнитьToolStripMenuItem.Text = "Заполнить";
             this.заполнитьToolStripMenuItem.Click += new System.EventHandler(this.заполнитьToolStripMenuItem_Click);
             // 
-            // label2
+            // методToolStripMenuItem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(493, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(182, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Количество знаков после запятой";
+            this.методToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.гауссаToolStripMenuItem,
+            this.прогонкиToolStripMenuItem,
+            this.квадратногоКорняToolStripMenuItem});
+            this.методToolStripMenuItem.Name = "методToolStripMenuItem";
+            this.методToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.методToolStripMenuItem.Text = "Метод";
             // 
-            // Precision
+            // гауссаToolStripMenuItem
             // 
-            this.Precision.Location = new System.Drawing.Point(496, 83);
-            this.Precision.MaxLength = 2;
-            this.Precision.Name = "Precision";
-            this.Precision.Size = new System.Drawing.Size(100, 20);
-            this.Precision.TabIndex = 22;
+            this.гауссаToolStripMenuItem.Name = "гауссаToolStripMenuItem";
+            this.гауссаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.гауссаToolStripMenuItem.Text = "Гаусса";
+            this.гауссаToolStripMenuItem.Click += new System.EventHandler(this.гауссаToolStripMenuItem_Click);
+            // 
+            // прогонкиToolStripMenuItem
+            // 
+            this.прогонкиToolStripMenuItem.Name = "прогонкиToolStripMenuItem";
+            this.прогонкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.прогонкиToolStripMenuItem.Text = "Прогонки";
+            this.прогонкиToolStripMenuItem.Click += new System.EventHandler(this.прогонкиToolStripMenuItem_Click);
+            // 
+            // квадратногоКорняToolStripMenuItem
+            // 
+            this.квадратногоКорняToolStripMenuItem.Name = "квадратногоКорняToolStripMenuItem";
+            this.квадратногоКорняToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.квадратногоКорняToolStripMenuItem.Text = "Квадратного корня";
+            this.квадратногоКорняToolStripMenuItem.Click += new System.EventHandler(this.квадратногоКорняToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 361);
-            this.Controls.Add(this.Precision);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.dataGridView3);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.label1);
@@ -212,12 +200,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem решитьToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem методомГауссаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem заполнитьToolStripMenuItem;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox Precision;
-        private System.Windows.Forms.ToolStripMenuItem методомПрогонкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem методToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem гауссаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem прогонкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem квадратногоКорняToolStripMenuItem;
     }
 }
 

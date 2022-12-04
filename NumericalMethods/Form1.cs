@@ -15,8 +15,9 @@ namespace NumericalMethods
 {
     public partial class Form1 : Form
     {
-        double[,] array = new double[81, 81];
+        double[,] x = new double[81, 81];
         double[] y = new double[81];
+        double[,] a = new double[81, 81];
 
         public Form1()
         {
@@ -124,9 +125,60 @@ namespace NumericalMethods
             return x;
         }
 
-        private double[] RunThrough(double[,] array, double[] y)
+        private double[] SquareRootMethod(double[,] array)
         {
-            return y;
+            int n = Convert.ToInt32(Count.Text);
+            double[,] S = new double[n + 1, n + 1];
+            double[,] D = new double[n + 1, n + 1];  
+
+            
+            S[1,1] = Math.Sqrt(Math.Abs(array[1,1]));
+            D[1,1] = Math.Sign(array[1,1]);
+
+            for (int j = 2; j <= n; ++j)
+            {
+                S[1, j] = array[1,j] / (S[1, 1] * D[1, 1]);
+            }
+
+            for (int i = 2; i <= n; ++i)
+            {
+                double sum = 0;
+                for (int l = 1; l <= i - 1; ++l)
+                    sum = sum + S[l,i] * S[l,i] * D[l, l];
+                S[i,i] = Math.Sqrt(Math.Abs(array[i,i] - sum));
+                D[i,i] = Math.Sign(Math.Round((array[i, i] - sum),1));
+                for (int j = i + 1; j <= n; ++j)
+                {
+                    sum = 0;
+                    for (int l = 1; l <= i - 1; l++)
+                    {
+                        sum = sum + S[l,i] * S[l,j] * D[l,l];
+                    }
+                    S[i,j] = (array[i,j] - sum) / (S[i,i] * D[i,i]);
+                }
+            }
+
+            double[] y = new double[n + 1];
+            y[1] = array[1, n + 1] / S[1, 1] * D[1, 1];
+            for (int i = 2; i <= n; ++i)
+            {
+                double sum = 0;
+                for (int l = 1; l <= i - 1; ++l)
+                    sum = sum + S[l,i] * y[l] * D[l,l];
+                y[i] = (array[i,n+1] - sum) / (S[i,i] * D[i,i]);
+            }
+
+            double[] x = new double[n];
+            x[n-1] = y[n-1] / S[n-1,n-1];
+            for (int i = n - 1; i >= 1; --i)
+            {
+                double sum = 0;
+                for (int l = i + 1; l <= n-1; ++l)
+                    sum = sum + S[i,l] * x[l];
+                x[i] = (y[i] - sum) / S[i,i];
+            }
+
+            return x;
         }
 
         private void Count_TextChanged(object sender, EventArgs e)
@@ -141,7 +193,7 @@ namespace NumericalMethods
                 {
                     dataGridView1.Columns[i].Name = "x" + (i + 1).ToString();
                 }
-                array = new double[dataGridView1.RowCount, dataGridView1.ColumnCount];
+                x = new double[dataGridView1.RowCount, dataGridView1.ColumnCount];
                 y = new double[dataGridView2.RowCount];
             }
         }
@@ -171,34 +223,69 @@ namespace NumericalMethods
             }
         }
 
-        private void методомГауссаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FillArray()
         {
-            Print(GaussMethod(array, y), dataGridView3, Accuracy());
-        }
-
-        private void методомПрогонкиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Print(SweepMethod(array, y), Accuracy());
-        }
-
-        private void Print(double[] array, DataGridView dgv ,int accuracy)
-        {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                dgv.Rows[i].Cells[0].Value = Math.Round(array[i], accuracy);
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    x[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value);
+                }
             }
+
+            for (int i = 0; i < dataGridView2.RowCount; i++)
+            {
+                y[i] = Convert.ToDouble(dataGridView2.Rows[i].Cells[0].Value);
+            }
+
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount + 1; j++)
+                {
+                    if (j != dataGridView1.ColumnCount)
+                    {
+                        a[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value);
+                    }
+                    else
+                    {
+                        a[i, j] = Convert.ToDouble(dataGridView2.Rows[i].Cells[0].Value);
+                    }
+                }
+            }
+        }
+
+        private void Print(double[] x, int accuracy)
+        {
+            for (int i = 0; i < x.Length; i++)
+            {
+                dataGridView3.RowCount = x.Length;
+                dataGridView3.Rows[i].Cells[0].Value = Math.Round(x[i], accuracy);
+            }
+
+            
         }
 
         private int Accuracy()
         {
-            if (Precision.Text != "")
-            {
-                return Convert.ToInt32(Precision.Text);
-            }
-            else
-            {
-                return 2;
-            }
+            return 2;
+        }
+
+        private void квадратногоКорняToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillArray();
+            Print(SquareRootMethod(a), Accuracy());
+        }
+
+        private void прогонкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillArray();
+            Print(SweepMethod(x, y), Accuracy());
+        }
+
+        private void гауссаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillArray();
+            Print(GaussMethod(x, y), Accuracy());
         }
     }
 }
