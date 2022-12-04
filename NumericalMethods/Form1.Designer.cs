@@ -39,10 +39,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.решитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.методомГауссаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.методомПрогонкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.заполнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.Precision = new System.Windows.Forms.TextBox();
-            this.методомПрогонкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -145,6 +145,13 @@
             this.методомГауссаToolStripMenuItem.Text = "Методом Гаусса";
             this.методомГауссаToolStripMenuItem.Click += new System.EventHandler(this.методомГауссаToolStripMenuItem_Click);
             // 
+            // методомПрогонкиToolStripMenuItem
+            // 
+            this.методомПрогонкиToolStripMenuItem.Name = "методомПрогонкиToolStripMenuItem";
+            this.методомПрогонкиToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.методомПрогонкиToolStripMenuItem.Text = "Методом прогонки";
+            this.методомПрогонкиToolStripMenuItem.Click += new System.EventHandler(this.методомПрогонкиToolStripMenuItem_Click);
+            // 
             // заполнитьToolStripMenuItem
             // 
             this.заполнитьToolStripMenuItem.Name = "заполнитьToolStripMenuItem";
@@ -168,13 +175,6 @@
             this.Precision.Name = "Precision";
             this.Precision.Size = new System.Drawing.Size(100, 20);
             this.Precision.TabIndex = 22;
-            // 
-            // методомПрогонкиToolStripMenuItem
-            // 
-            this.методомПрогонкиToolStripMenuItem.Name = "методомПрогонкиToolStripMenuItem";
-            this.методомПрогонкиToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.методомПрогонкиToolStripMenuItem.Text = "Методом прогонки";
-            this.методомПрогонкиToolStripMenuItem.Click += new System.EventHandler(this.методомПрогонкиToolStripMenuItem_Click);
             // 
             // Form1
             // 

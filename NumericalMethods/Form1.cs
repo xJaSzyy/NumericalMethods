@@ -5,7 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -28,9 +30,9 @@ namespace NumericalMethods
 
         private double[] GaussMethod(double[,] array, double[] y)
         {
-            double[] x = new double[dataGridView1.RowCount];
+            double[] x = new double[dataGridView3.RowCount];
             double max;
-            double eps = 1e-9;
+            double eps = 0.00001;
             int index, k = 0;
             int n = dataGridView1.RowCount;
             while (k < n)
@@ -68,7 +70,7 @@ namespace NumericalMethods
                     {
                         continue;
                     }
-                    for (int j = 0; j < n; j++)
+                    for (int j = k; j < n; j++)
                     {
                         array[i, j] = array[i, j] / temp2;
                     }
@@ -77,7 +79,7 @@ namespace NumericalMethods
                     {
                         continue;
                     }
-                    for (int j = 0; j < n; j++)
+                    for (int j = k; j < n; j++)
                     {
                         array[i, j] = array[i, j] - array[k, j];
                     }
@@ -120,6 +122,11 @@ namespace NumericalMethods
                 x[i] = eps[i] * x[i + 1] + et[i];
             }
             return x;
+        }
+
+        private double[] RunThrough(double[,] array, double[] y)
+        {
+            return y;
         }
 
         private void Count_TextChanged(object sender, EventArgs e)
@@ -166,39 +173,19 @@ namespace NumericalMethods
 
         private void методомГауссаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FillArray();
-
-            PrintArray(GaussMethod(array, y), Accuracy());
+            Print(GaussMethod(array, y), dataGridView3, Accuracy());
         }
 
         private void методомПрогонкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FillArray();
-
-            PrintArray(SweepMethod(array, y), Accuracy());
+            //Print(SweepMethod(array, y), Accuracy());
         }
 
-        private void FillArray()
+        private void Print(double[] array, DataGridView dgv ,int accuracy)
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                {
-                    array[i, j] = Convert.ToDouble(dataGridView1.Rows[i].Cells[j].Value);
-                }
-            }
-
-            for (int i = 0; i < dataGridView2.RowCount; i++)
-            {
-                y[i] = Convert.ToDouble(dataGridView2.Rows[i].Cells[0].Value);
-            }
-        }
-
-        private void PrintArray(double[] x, int accuracy)
-        {
-            for (int i = 0; i < x.Length; i++)
-            {
-                dataGridView3.Rows[i].Cells[0].Value = Math.Round(x[i], accuracy);
+                dgv.Rows[i].Cells[0].Value = Math.Round(array[i], accuracy);
             }
         }
 
