@@ -19,6 +19,22 @@ namespace NumericalMethods
         double[] y = new double[81];
         double[,] a = new double[81, 81];
 
+        double Sign(double x)
+        {
+            if (x == 0.0)
+            {
+                return 0;
+            }
+            else if (x > 0.0)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -128,12 +144,12 @@ namespace NumericalMethods
         private double[] SquareRootMethod(double[,] array)
         {
             int n = Convert.ToInt32(Count.Text);
+            int m = n + 1;
             double[,] S = new double[n + 1, n + 1];
             double[,] D = new double[n + 1, n + 1];  
 
-            
             S[1,1] = Math.Sqrt(Math.Abs(array[1,1]));
-            D[1,1] = Math.Sign(array[1,1]);
+            D[1,1] = Sign(array[1,1]);
 
             for (int j = 2; j <= n; ++j)
             {
@@ -144,9 +160,11 @@ namespace NumericalMethods
             {
                 double sum = 0;
                 for (int l = 1; l <= i - 1; ++l)
-                    sum = sum + S[l,i] * S[l,i] * D[l, l];
+                {
+                    sum = sum + S[l, i] * S[l, i] * D[l, l];
+                }
                 S[i,i] = Math.Sqrt(Math.Abs(array[i,i] - sum));
-                D[i,i] = Math.Sign(Math.Round((array[i, i] - sum),1));
+                D[i,i] = Sign(array[i, i] - sum);
                 for (int j = i + 1; j <= n; ++j)
                 {
                     sum = 0;
@@ -159,26 +177,90 @@ namespace NumericalMethods
             }
 
             double[] y = new double[n + 1];
-            y[1] = array[1, n + 1] / S[1, 1] * D[1, 1];
+            y[1] = array[1, m] / S[1, 1] * D[1, 1];
             for (int i = 2; i <= n; ++i)
             {
                 double sum = 0;
                 for (int l = 1; l <= i - 1; ++l)
-                    sum = sum + S[l,i] * y[l] * D[l,l];
-                y[i] = (array[i,n+1] - sum) / (S[i,i] * D[i,i]);
+                {
+                    sum = sum + S[l, i] * y[l] * D[l, l];
+                }
+                y[i] = (array[i, m] - sum) / (S[i, i] * D[i, i]);
             }
 
-            double[] x = new double[n];
-            x[n-1] = y[n-1] / S[n-1,n-1];
+            double[] x = new double[n+1];
+            x[n] = y[n] / S[n,n];
             for (int i = n - 1; i >= 1; --i)
             {
                 double sum = 0;
-                for (int l = i + 1; l <= n-1; ++l)
-                    sum = sum + S[i,l] * x[l];
+                for (int l = i + 1; l <= n; ++l)
+                {
+                    sum = sum + S[i, l] * x[l];
+                }
                 x[i] = (y[i] - sum) / S[i,i];
             }
 
             return x;
+        }
+
+        private double[] SteepestDescentMethod(double[,] array, double[] y)
+        {
+            int N = Convert.ToInt32(Count.Text);
+            double[] x0 = new double[N];
+            double[] x1 = new double[N];
+            double[] r = new double[N];
+            double[] r1 = new double[N];
+            double s, s1 = 0;
+            int k = 0;
+
+            do
+            {
+                for (int i = 0; i < N; i++)
+                {
+                    r[i] = y[i];
+                    for (int j = 0; j < N; j++)
+                    {
+                        r[i] -= array[i, j] * x0[j];
+                    }
+                }
+
+                s = 0;
+                for (int i = 0; i < N; i++)
+                {
+                    s += r[i] * r[i];
+                }
+
+                for (int i = 0; i < N; i++)
+                {
+                    r1[i] = 0;
+                    for (int j = 0; j < N; j++)
+                    {
+                        r1[i] += array[i, j] * r[j];
+                    }
+                }
+
+                s1 = 0;
+                for (int i = 0; i < N; i++)
+                {
+                    s1 += r[i] * r1[i];
+                }
+                s /= s1;
+
+                for (int i = 0; i < N; i++)
+                {
+                    x1[i] += s * r[i];
+                }
+                s = 0;
+
+                for (int i = 0; i < N; i++)
+                {
+                    s += (x0[i] - x1[i]) * (x0[i] - x1[i]);
+                    x0[i] = x1[i];
+                }
+                k++;
+            }
+            while (k < 50000 && Math.Sqrt(s) > 0.01);
+            return x1;
         }
 
         private void Count_TextChanged(object sender, EventArgs e)
@@ -261,13 +343,11 @@ namespace NumericalMethods
                 dataGridView3.RowCount = x.Length;
                 dataGridView3.Rows[i].Cells[0].Value = Math.Round(x[i], accuracy);
             }
-
-            
         }
 
         private int Accuracy()
         {
-            return 2;
+            return 3;
         }
 
         private void квадратногоКорняToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,6 +366,12 @@ namespace NumericalMethods
         {
             FillArray();
             Print(GaussMethod(x, y), Accuracy());
+        }
+
+        private void наискорейшегоСпускаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FillArray();
+            Print(SteepestDescentMethod(x, y), Accuracy());
         }
     }
 }

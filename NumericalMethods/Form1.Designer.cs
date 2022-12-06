@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Count = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,11 +37,12 @@
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.заполнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.методToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.гауссаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.прогонкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.квадратногоКорняToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.заполнитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.наискорейшегоСпускаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -91,8 +92,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle5.NullValue = null;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.NullValue = null;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column1.HeaderText = "y";
             this.Column1.Name = "Column1";
             this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -128,19 +129,13 @@
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // заполнитьToolStripMenuItem
-            // 
-            this.заполнитьToolStripMenuItem.Name = "заполнитьToolStripMenuItem";
-            this.заполнитьToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.заполнитьToolStripMenuItem.Text = "Заполнить";
-            this.заполнитьToolStripMenuItem.Click += new System.EventHandler(this.заполнитьToolStripMenuItem_Click);
-            // 
             // методToolStripMenuItem
             // 
             this.методToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.гауссаToolStripMenuItem,
             this.прогонкиToolStripMenuItem,
-            this.квадратногоКорняToolStripMenuItem});
+            this.квадратногоКорняToolStripMenuItem,
+            this.наискорейшегоСпускаToolStripMenuItem});
             this.методToolStripMenuItem.Name = "методToolStripMenuItem";
             this.методToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.методToolStripMenuItem.Text = "Метод";
@@ -148,23 +143,37 @@
             // гауссаToolStripMenuItem
             // 
             this.гауссаToolStripMenuItem.Name = "гауссаToolStripMenuItem";
-            this.гауссаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.гауссаToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.гауссаToolStripMenuItem.Text = "Гаусса";
             this.гауссаToolStripMenuItem.Click += new System.EventHandler(this.гауссаToolStripMenuItem_Click);
             // 
             // прогонкиToolStripMenuItem
             // 
             this.прогонкиToolStripMenuItem.Name = "прогонкиToolStripMenuItem";
-            this.прогонкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.прогонкиToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.прогонкиToolStripMenuItem.Text = "Прогонки";
             this.прогонкиToolStripMenuItem.Click += new System.EventHandler(this.прогонкиToolStripMenuItem_Click);
             // 
             // квадратногоКорняToolStripMenuItem
             // 
             this.квадратногоКорняToolStripMenuItem.Name = "квадратногоКорняToolStripMenuItem";
-            this.квадратногоКорняToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.квадратногоКорняToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.квадратногоКорняToolStripMenuItem.Text = "Квадратного корня";
             this.квадратногоКорняToolStripMenuItem.Click += new System.EventHandler(this.квадратногоКорняToolStripMenuItem_Click);
+            // 
+            // заполнитьToolStripMenuItem
+            // 
+            this.заполнитьToolStripMenuItem.Name = "заполнитьToolStripMenuItem";
+            this.заполнитьToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.заполнитьToolStripMenuItem.Text = "Заполнить";
+            this.заполнитьToolStripMenuItem.Click += new System.EventHandler(this.заполнитьToolStripMenuItem_Click);
+            // 
+            // наискорейшегоСпускаToolStripMenuItem
+            // 
+            this.наискорейшегоСпускаToolStripMenuItem.Name = "наискорейшегоСпускаToolStripMenuItem";
+            this.наискорейшегоСпускаToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.наискорейшегоСпускаToolStripMenuItem.Text = "Наискорейшего спуска";
+            this.наискорейшегоСпускаToolStripMenuItem.Click += new System.EventHandler(this.наискорейшегоСпускаToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -205,6 +214,7 @@
         private System.Windows.Forms.ToolStripMenuItem гауссаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem прогонкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem квадратногоКорняToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem наискорейшегоСпускаToolStripMenuItem;
     }
 }
 
